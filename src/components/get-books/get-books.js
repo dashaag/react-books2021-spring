@@ -9,6 +9,10 @@ import IconButton from '@mui/material/IconButton';
 import Grid from '@mui/material/Grid';
 import Divider from '@mui/material/Divider';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
+import Button from '@mui/material/Button';
+import { Link } from 'react-router-dom';
+import { Fragment } from 'react';
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 
 class GetBooks extends React.Component {
     constructor() {
@@ -43,17 +47,27 @@ class GetBooks extends React.Component {
         return (
             <div>
                 <Grid item xs={12} md={6}>
-                    <List >
+                    <Link to="/add-book"><Button color="secondary">Create new book</Button></Link>
+                    <List>
                         {this.state.books.map(book =>
                             <div>
                                 <ListItem
                                     secondaryAction={
-                                        <IconButton 
-                                            edge="end"  
-                                            aria-label="delete"
-                                            onClick={() => this.deleteBook(book.id)}>
-                                            <DeleteOutlinedIcon />
-                                        </IconButton>
+                                        <Fragment>
+                                            <Link to={`/edit-book/${book.id}`}>
+                                                <IconButton 
+                                                    edge="end"  
+                                                    aria-label="edit">
+                                                    <EditOutlinedIcon />
+                                                </IconButton>
+                                            </Link>
+                                            <IconButton 
+                                                edge="end"  
+                                                aria-label="delete"
+                                                onClick={() => this.deleteBook(book.id)}>
+                                                <DeleteOutlinedIcon />
+                                            </IconButton>
+                                        </Fragment>
                                     }
                                 >
                                     <ListItemAvatar>
